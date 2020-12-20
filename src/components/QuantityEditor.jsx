@@ -1,27 +1,20 @@
 import React from "react";
+import {useDispatch, useSelector} from "react-redux"
 
-const QuantityEditor = () => {
-  const [quantity, setQuantity] = React.useState(1);
-  const decrement = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
-  const increment = () => {
-    setQuantity(quantity + 1);
-  };
+const QuantityEditor = ({ product }) => {
+    const dispatch = useDispatch();
   return (
     <div className="d-flex justify-content-center">
-      <div onClick={decrement} className="border p-3">
+      <div onClick={() => dispatch({ type: 'DEC', payload: product.id})} className="border p-3">
         <h5>-</h5>
       </div>
       <div className="border px-4 py-3">
-        <h5>{quantity}</h5>
+        <h5>{product.quantity}</h5>
       </div>
-      <div onClick={increment} className="border p-3">
+      <div onClick={() => dispatch({ type: 'INC', payload: product.id})} className="border p-3">
         <h5>+</h5>
       </div>
-    </div>
+    </div> 
   );
 };
 
